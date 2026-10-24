@@ -1,0 +1,133 @@
+{
+  "business_name": "Gyanavedha Institute",
+  "fallback_reply": "Sorry, I'm not sure about that yet. I've saved your question so the Gyanavedha team can teach me. Meanwhile, please email help@gyanavedha.example.",
+  "confidence_threshold": 0.35,
+  "intents": [
+    {
+      "name": "greeting",
+      "examples": [
+        "hi", "hello", "hey there", "good morning", "good evening",
+        "hello, is anyone there?", "namaste", "hii", "hey, I need some help"
+      ],
+      "answer": "Hello! I'm Veda, the Gyanavedha Institute assistant. Ask me about admissions, fees, courses, exams, hostel, scholarships or placements."
+    },
+    {
+      "name": "goodbye",
+      "examples": [
+        "bye", "goodbye", "see you later", "talk to you soon", "that's all for now",
+        "ok bye", "have a nice day", "thats all, bye", "ill come back later"
+      ],
+      "answer": "Thank you for visiting Gyanavedha Institute. Have a great day!"
+    },
+    {
+      "name": "thanks",
+      "examples": [
+        "thanks", "thank you", "thanks a lot", "that was helpful", "great, thank you",
+        "thanku", "much appreciated", "ok got it, thanks", "super, thx"
+      ],
+      "answer": "You're welcome! Let me know if there is anything else I can help with."
+    },
+    {
+      "name": "admission",
+      "examples": [
+        "how can I apply for admission", "what is the admission process",
+        "last date to apply", "am I eligible for BCom", "eligibility for MBA",
+        "do I need an entrance exam to join", "admision process for PG",
+        "which documents are required to apply", "how to join the college after 12th",
+        "admission kab shuru hoga"
+      ],
+      "answer": "Applications for UG and PG programs open every March on our website. UG needs 12th pass (50% minimum). PG needs a bachelor's degree (50% minimum). Keep your marks cards, ID proof and photos ready. (Sample data for demo.)"
+    },
+    {
+      "name": "fees",
+      "examples": [
+        "what is the fee structure", "how much is the tuition fee", "fees for BBA",
+        "total yearly fee for MSc", "can I pay fees in installments",
+        "how do I pay my fees online", "fee kitna hai", "is there any late fee",
+        "what are the course charges", "fees details pls"
+      ],
+      "answer": "UG tuition is Rs. 45,000 per year and PG tuition is Rs. 60,000 per year. Fees can be paid in two installments through the student portal. (Sample data for demo.)"
+    },
+    {
+      "name": "courses",
+      "examples": [
+        "which courses do you offer", "list of UG programs", "what PG courses are available",
+        "do you have computer science", "is there an MBA program", "streams available after 12th",
+        "tell me about the BCA course", "what degrees can I study here",
+        "course details", "which branches are there"
+      ],
+      "answer": "UG: BCom, BBA, BCA, BSc (Computer Science, Mathematics). PG: MBA, MCom, MSc (Computer Science). All programs are 3 years (UG) or 2 years (PG). (Sample data for demo.)"
+    },
+    {
+      "name": "exams",
+      "examples": [
+        "when are the exams", "exam timetable", "semester exam dates",
+        "when will the hall ticket be released", "how do I check my results",
+        "when is the exam form last date", "internal exam schedule",
+        "exam kab hai", "how many exams in a year", "supplementary exam details"
+      ],
+      "answer": "Semester exams are held in November and May. The timetable and hall tickets are published on the student portal two weeks before the exams, and results come out about 30 days after. (Sample data for demo.)"
+    },
+    {
+      "name": "hostel",
+      "examples": [
+        "is hostel available", "hostel facilities", "how much is the hostel fee",
+        "do you have a girls hostel", "can I stay in the hostel", "hostle availability",
+        "what food is provided in the mess", "hostel rules and timings",
+        "accommodation for outstation students", "hostel milega kya"
+      ],
+      "answer": "Separate boys' and girls' hostels are available on campus. The hostel fee is Rs. 60,000 per year including mess. Rooms are allotted on a first-come basis. (Sample data for demo.)"
+    },
+    {
+      "name": "scholarship",
+      "examples": [
+        "are scholarships available", "how to apply for a scholarship", "merit scholarship details",
+        "is there any fee concession", "scholarship for SC ST students",
+        "financial aid for poor students", "do you accept government scholarships",
+        "scholarhsip eligibility", "can I get a fee waiver", "scholarship kaise milega"
+      ],
+      "answer": "We offer merit scholarships (up to 50% tuition for top scorers) and accept government scholarships. Apply at the office with your income certificate and marks card. (Sample data for demo.)"
+    },
+    {
+      "name": "placements",
+      "examples": [
+        "do you provide placements", "which companies visit the campus", "average package offered",
+        "placement record of last year", "is there campus recruitment",
+        "do you give internships", "what is the highest salary package",
+        "training for interviews", "job opportunities after MBA", "placement milta hai kya"
+      ],
+      "answer": "Our placement cell organises campus drives every year with 40+ companies and offers interview training and internships. (Sample data for demo.)"
+    },
+    {
+      "name": "certificates",
+      "examples": [
+        "how to get a bonafide certificate", "I need my transfer certificate",
+        "how do I get a duplicate marks card", "apply for study certificate",
+        "how long does it take to get my degree certificate",
+        "documents needed for a migration certificate", "where do I collect my TC",
+        "certificate apply cheyyodu", "provisional certificate request", "bonafide letter for bank loan"
+      ],
+      "answer": "Apply for bonafide, transfer, migration and other certificates at the office counter or on the student portal. Certificates are issued within 3 to 5 working days. (Sample data for demo.)"
+    },
+    {
+      "name": "transport",
+      "examples": [
+        "is there a college bus", "bus timings", "which routes does the bus cover",
+        "how much is the bus fee", "transport facility for day scholars",
+        "bus pass details", "how to reach the college", "is there a bus from the railway station",
+        "bus facility hai kya", "college bus stops list"
+      ],
+      "answer": "College buses run on 8 city routes from 7:30 AM. The transport fee is Rs. 12,000 per year. Route maps are available at the office. (Sample data for demo.)"
+    },
+    {
+      "name": "contact_office",
+      "examples": [
+        "how can I contact the college", "office phone number", "I want to talk to a person",
+        "give me your email address", "where is the admission office", "college address",
+        "what are the office timings", "who do I speak to about my problem",
+        "contact details of the principal", "office hours"
+      ],
+      "answer": "Contact the office at help@gyanavedha.example or 080-0000-0000, Monday to Saturday, 9 AM to 4 PM. (Sample data for demo.)"
+    }
+  ]
+}
