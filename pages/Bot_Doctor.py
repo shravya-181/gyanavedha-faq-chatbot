@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from chatbot.doctor import diagnose
+from chatbot.logger import read_feedback
 
 st.set_page_config(page_title="Bot Doctor", page_icon="🩺", layout="wide")
 st.title("🩺 Bot Doctor")
@@ -82,3 +83,18 @@ if r["clusters"]:
                      f"(confidence {c['avg_confidence']})")
 else:
     st.write("Nothing logged yet. Chat with the bot and ask things it does not know.")
+
+    
+# ---------------- Feedback ----------------
+st.subheader("What customers thought of the answers")
+feedback = read_feedback()
+if feedback:
+    ups = sum(f["rating"] == "up" for f in feedback)
+    downs = len(feedback) - ups
+    st.write(f"{ups} thumbs up, {downs} thumbs down")
+    bad = [f for f in feedback if f["rating"] == "down"]
+    if bad:
+        st.write("Answers marked as unhelpful (fix these first):")
+        st.dataframe(pd.DataFrame(bad)[["question", "answer"]], hide_index=True, width="stretch")
+else:
+    st.write("No feedback yet. Use the thumbs buttons under the bot's answers.")
