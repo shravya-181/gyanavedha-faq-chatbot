@@ -3,4 +3,5 @@
    *.pyc
    .pytest_cache/
    data/unanswered.csv
+   data/feedback.csv
    .vscode/
