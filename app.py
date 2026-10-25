@@ -25,11 +25,19 @@ st.markdown("""
 
 :root {
   --green: #0F4C45;  --green-2: #17695E;  --gold: #C9A227;
-  --mist: #F3F6F4;   --ink: #13231F;      --muted: #4C625B;  --line: #D5E0DA;
+  --mist: #DCE9E1;   --ink: #13231F;      --muted: #4C625B;  --line: #D5E0DA;
 }
 html, body, .stApp, .stMarkdown, p, button, input, textarea {
   font-family: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
 }
+.stApp {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(201,162,39,.16), transparent 38%),
+    linear-gradient(180deg, #E6F0EA 0%, #D2E3D9 100%);
+  background-attachment: fixed;
+}
+[data-testid="stBottom"], [data-testid="stBottom"] > div,
+[data-testid="stBottomBlockContainer"] { background: transparent; }
 #MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"] { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
 .block-container { max-width: 760px; padding-top: 1.1rem; padding-bottom: 6rem; }
