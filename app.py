@@ -40,6 +40,12 @@ html, body, .stApp, .stMarkdown, p, button, input, textarea {
 [data-testid="stBottomBlockContainer"] { background: transparent; }
 #MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"] { visibility: hidden; }
 header[data-testid="stHeader"] { background: transparent; }
+/* keep the arrow that opens the sidebar visible (it sits inside the hidden toolbar) */
+[data-testid="stExpandSidebarButton"] {
+  visibility: visible; color: var(--green); background: #fff;
+  border: 1px solid var(--line); border-radius: 10px;
+}
+[data-testid="stExpandSidebarButton"] * { color: var(--green); }
 .block-container { max-width: 760px; padding-top: 1.1rem; padding-bottom: 6rem; }
 
 /* zari border */
@@ -266,3 +272,6 @@ for i, msg in enumerate(st.session_state.messages):
 if not no_questions_yet:
     with st.expander("More questions"):
         question_buttons()
+
+# ---------------- Staff link ----------------
+st.page_link("pages/Bot_Doctor.py", label="Bot Doctor (for staff)", icon="🩺")
