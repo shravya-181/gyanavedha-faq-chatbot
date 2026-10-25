@@ -2,7 +2,7 @@
 
 A customer-support chatbot for a UG and PG college. It answers common questions about admissions, fees, courses, exams, hostel, scholarships, placements and more, and it tells the college office **how to make itself better**.
 
-**Live demo:** https://gyanavedha-institute.streamlit.app
+**Live demo:** https://gyanavedha-assistant.streamlit.app/
 
 > Gyanavedha Institute is a **fictional demo college**. All fees, dates, phone numbers and e-mail addresses in this project are sample data.
 
