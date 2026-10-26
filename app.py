@@ -15,6 +15,9 @@ from chatbot.logger import DEFAULT_PATH, log_feedback, read_feedback, read_unans
 FAQ_PATH = "data/faqs.json"
 SKIP_INTENTS = {"greeting", "goodbye", "thanks"}
 
+# Coming back to the chat page logs staff out of the Bot Doctor.
+st.session_state["staff_ok"] = False
+
 st.set_page_config(page_title="Institute Help Desk", page_icon="🎓",
                    initial_sidebar_state="collapsed")
 
