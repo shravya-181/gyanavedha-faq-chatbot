@@ -3,6 +3,7 @@ app.py  -  the Streamlit chat page.   Run with:  streamlit run app.py
 """
 
 import json
+import os
 import re
 import time
 
@@ -139,14 +140,20 @@ def icon_for(label: str) -> str:
 
 
 # ---------------- Load the bot and the FAQ settings ----------------
+def faq_version() -> float:
+    """Time the FAQ file was last saved. When it changes, the bot is re-trained."""
+    return os.path.getmtime(FAQ_PATH)
+
+
 @st.cache_resource
-def load_bot() -> Chatbot:
-    """Train the bot once and reuse it (Streamlit reruns this file on every click)."""
+def load_bot(version: float) -> Chatbot:
+    """Train the bot once and reuse it (Streamlit reruns this file on every click).
+    `version` is only there so the saved copy is replaced when faqs.json changes."""
     return Chatbot(FAQ_PATH)
 
 
 @st.cache_data
-def load_settings() -> dict:
+def load_settings(version: float) -> dict:
     """Read the optional display settings from faqs.json."""
     with open(FAQ_PATH, encoding="utf-8") as f:
         data = json.load(f)
@@ -160,8 +167,8 @@ def load_settings() -> dict:
     }
 
 
-bot = load_bot()
-settings = load_settings()
+bot = load_bot(faq_version())
+settings = load_settings(faq_version())
 name = bot.classifier.business_name
 
 # ---------------- Header ----------------
@@ -273,5 +280,5 @@ if not no_questions_yet:
     with st.expander("More questions"):
         question_buttons()
 
-# ---------------- Staff link ----------------
-st.page_link("pages/Bot_Doctor.py", label="Bot Doctor (for staff)", icon="🩺")
+# The Bot Doctor is for staff only, so it is not linked here.
+# Staff open it from the sidebar arrow (top left) or at the /Bot_Doctor address.
