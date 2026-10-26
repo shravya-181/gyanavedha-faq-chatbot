@@ -1,7 +1,15 @@
-   venv/
-   __pycache__/
-   *.pyc
-   .pytest_cache/
-   data/unanswered.csv
-   data/feedback.csv
-   .vscode/
+# Python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Runtime data (created while the bot runs)
+data/unanswered.csv
+data/feedback.csv
+
+# Editor / OS
+.vscode/
+.DS_Store
+# Generated reports
+reports/

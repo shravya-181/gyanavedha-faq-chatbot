@@ -1,6 +1,7 @@
 {
   "business_name": "Gyanavedha Institute",  "tagline": "Admissions • Fees • Hostel • Placements — ask me anything",
-  "suggestions": ["Admission process", "Fee structure", "Hostel", "Scholarships", "Placements", "Contact office"],
+  "status": "Help desk is online. Replies in seconds.",
+  "suggestions": ["Admissions", "Fee structure", "Hostel", "Scholarships", "Placements", "Contact office"],"suggestions": ["Admission process", "Fee structure", "Hostel", "Scholarships", "Placements", "Contact office"],
   "contact": "📞 080-0000-0000  ·  ✉️ help@gyanavedha.example  ·  Mon-Sat, 9 AM - 4 PM",
   "fallback_reply": "Sorry, I'm not sure about that yet. I've saved your question so the Gyanavedha team can teach me. Meanwhile, please email help@gyanavedha.example.",
   "confidence_threshold": 0.35,

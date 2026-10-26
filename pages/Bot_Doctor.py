@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from chatbot.doctor import diagnose
+from chatbot.evaluate import dataset_checks, evaluate
 from chatbot.logger import read_feedback
 
 st.set_page_config(page_title="Bot Doctor", page_icon="🩺", layout="wide")
@@ -84,7 +85,6 @@ if r["clusters"]:
 else:
     st.write("Nothing logged yet. Chat with the bot and ask things it does not know.")
 
-    
 # ---------------- Feedback ----------------
 st.subheader("What customers thought of the answers")
 feedback = read_feedback()
@@ -98,3 +98,47 @@ if feedback:
         st.dataframe(pd.DataFrame(bad)[["question", "answer"]], hide_index=True, width="stretch")
 else:
     st.write("No feedback yet. Use the thumbs buttons under the bot's answers.")
+
+# ---------------- Held-out evaluation ----------------
+st.subheader("Report card on hidden test sentences")
+st.caption("30% of your examples are hidden from the bot while it learns, then used as a test. "
+           "Questions from data/oos.json (things a college bot should refuse) check the threshold.")
+if st.button("Run evaluation") or "evaluation" in st.session_state:
+    if "evaluation" not in st.session_state:
+        with st.spinner("Testing the bot..."):
+            st.session_state.evaluation = evaluate(save=False)
+    ev = st.session_state.evaluation
+    if "error" in ev:
+        st.warning(ev["error"])
+    else:
+        e1, e2, e3, e4 = st.columns(4)
+        e1.metric("Accuracy", f"{int(ev['accuracy'] * 100)}%")
+        e2.metric("Macro F1", ev["macro_f1"])
+        e3.metric("Tested on", f"{ev['test_examples']} sentences")
+        e4.metric("Best threshold", ev["best_threshold"])
+
+        st.write("**Threshold table** (what happens at each cut-off)")
+        sweep = pd.DataFrame(ev["threshold_sweep"]).set_index("threshold")
+        sweep.columns = ["answered correctly", "answered wrongly", "refused",
+                         "nonsense rejected", "balanced score"][:len(sweep.columns)]
+        st.dataframe(sweep, width="stretch")
+        st.caption(f"Your current threshold is {ev['current_threshold']}. "
+                   "Balanced score = average of 'answered correctly' and 'nonsense rejected'. "
+                   "A higher cut-off refuses more nonsense but also more real questions, "
+                   "so choose the balance you want.")
+
+        st.write("**Per intent**")
+        st.dataframe(pd.DataFrame(ev["per_intent"]).set_index("intent"), width="stretch")
+
+        st.write("**Confusion matrix** (rows = what the customer meant, columns = what the bot chose)")
+        st.dataframe(pd.DataFrame(ev["confusion_matrix"], index=ev["confusion_labels"],
+                                  columns=ev["confusion_labels"]), width="stretch")
+
+# ---------------- Dataset checks ----------------
+st.subheader("Checks on faqs.json")
+problems = dataset_checks()
+if problems:
+    for problem in problems:
+        st.write(f"- {problem}")
+else:
+    st.write("No problems found.")
