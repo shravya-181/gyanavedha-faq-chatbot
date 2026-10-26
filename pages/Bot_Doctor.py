@@ -11,6 +11,31 @@ from chatbot.evaluate import dataset_checks, evaluate
 from chatbot.logger import read_feedback
 
 st.set_page_config(page_title="Bot Doctor", page_icon="🩺", layout="wide")
+
+
+def staff_only() -> None:
+    """Ask for the staff password. The password lives in Streamlit secrets
+    (key: STAFF_PASSWORD), never in the code. If no password is set (for
+    example when running on your own computer), the page stays open."""
+    try:
+        password = st.secrets.get("STAFF_PASSWORD", "")
+    except Exception:
+        password = ""
+    if not password or st.session_state.get("staff_ok"):
+        return
+    st.title("🩺 Bot Doctor")
+    st.info("This page is for college staff. Please enter the staff password.")
+    typed = st.text_input("Staff password", type="password")
+    if typed:
+        if typed == password:
+            st.session_state.staff_ok = True
+            st.rerun()
+        else:
+            st.error("Wrong password.")
+    st.stop()
+
+
+staff_only()
 st.title("🩺 Bot Doctor")
 st.caption("Checks how well the bot understands new questions, and what to fix next.")
 
