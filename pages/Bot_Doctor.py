@@ -36,6 +36,11 @@ def staff_only() -> None:
 
 
 staff_only()
+
+if st.session_state.get("staff_ok"):
+    if st.sidebar.button("Log out"):
+        st.session_state["staff_ok"] = False
+        st.rerun()
 st.title("🩺 Bot Doctor")
 st.caption("Checks how well the bot understands new questions, and what to fix next.")
 
