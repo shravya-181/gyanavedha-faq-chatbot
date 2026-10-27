@@ -11,5 +11,10 @@ data/feedback.csv
 # Editor / OS
 .vscode/
 .DS_Store
+
 # Generated reports
 reports/
+
+# Secrets (staff password): never commit
+.streamlit/secrets.toml
+.env

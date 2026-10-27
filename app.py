@@ -10,7 +10,7 @@ import time
 import streamlit as st
 
 from chatbot.bot import Chatbot
-from chatbot.logger import DEFAULT_PATH, log_feedback, read_feedback, read_unanswered
+from chatbot.logger import log_feedback
 
 FAQ_PATH = "data/faqs.json"
 SKIP_INTENTS = {"greeting", "goodbye", "thanks"}
@@ -227,12 +227,6 @@ with st.sidebar:
         st.session_state.pop("messages", None)
         st.session_state.pop("context", None)
         st.rerun()
-
-    st.header("Activity")
-    feedback = read_feedback()
-    st.write(f"{len(read_unanswered(DEFAULT_PATH))} unanswered questions logged")
-    st.write(f"{sum(f['rating'] == 'up' for f in feedback)} 👍  "
-             f"{sum(f['rating'] == 'down' for f in feedback)} 👎")
 
 # ---------------- Chat state ----------------
 # st.session_state keeps data between reruns of this script.
