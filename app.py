@@ -209,8 +209,11 @@ def ask(text: str) -> None:
 def save_feedback(index: int) -> None:
     """Called when someone clicks thumbs up/down under an answer."""
     msg = st.session_state.messages[index]
+    if msg.get("rated"):                          # one vote per answer
+        return
     rating = st.session_state[f"fb_{index}"]      # 1 = thumbs up, 0 = thumbs down
     if rating is not None:
+        msg["rated"] = True
         log_feedback(msg["question"], msg["content"], "up" if rating == 1 else "down")
 
 
@@ -285,7 +288,10 @@ for i, msg in enumerate(st.session_state.messages):
             st.write(msg["content"])
 
         if msg["role"] == "assistant" and i > 0:
-            st.feedback("thumbs", key=f"fb_{i}", on_change=save_feedback, args=(i,))
+            st.feedback("thumbs", key=f"fb_{i}", on_change=save_feedback, args=(i,),
+                        disabled=bool(msg.get("rated")))
+            if msg.get("rated"):
+                st.caption("Thanks for your feedback 🙏")
             if show_details and msg["details"]:
                 with st.expander("How I decided"):
                     for d in msg["details"]:

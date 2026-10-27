@@ -18,7 +18,7 @@ def staff_only() -> None:
     (key: STAFF_PASSWORD), never in the code. If no password is set (for
     example when running on your own computer), the page stays open."""
     try:
-        password = st.secrets.get("STAFF_PASSWORD", "")
+        password = str(st.secrets.get("STAFF_PASSWORD", "")).strip()
     except Exception:
         password = ""
     if not password or st.session_state.get("staff_ok"):
@@ -27,7 +27,7 @@ def staff_only() -> None:
     st.info("This page is for college staff. Please enter the staff password.")
     typed = st.text_input("Staff password", type="password")
     if typed:
-        if typed == password:
+        if typed.strip() == password:
             st.session_state.staff_ok = True
             st.rerun()
         else:
