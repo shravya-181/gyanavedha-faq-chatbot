@@ -12,7 +12,117 @@
     "Placements"
   ],
   "fallback_reply": "I'm not sure about that one yet, and I've noted your question so the team can teach me.\n\nFor now, you can reach the office:\n- 📞 **080-0000-0000**\n- ✉️ **help@gyanavedha.example**\n- 🕘 Monday to Saturday, 9 AM to 4 PM",
-  "confidence_threshold": 0.35,
+  "confidence_threshold": 0.45,
+  "programs": [
+    {
+      "name": "BCom",
+      "level": "UG",
+      "aliases": [
+        "b.com",
+        "bachelor of commerce"
+      ],
+      "duration": "3 years",
+      "fee": "40,000",
+      "eligibility": "12th pass in any stream, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Accounting, taxation, business law and finance, with Tally and GST practice."
+    },
+    {
+      "name": "BBA",
+      "level": "UG",
+      "aliases": [
+        "bachelor of business administration"
+      ],
+      "duration": "3 years",
+      "fee": "50,000",
+      "eligibility": "12th pass in any stream, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Management basics, marketing, HR and entrepreneurship, with internships and case studies."
+    },
+    {
+      "name": "BCA",
+      "level": "UG",
+      "aliases": [
+        "bachelor of computer applications"
+      ],
+      "duration": "3 years",
+      "fee": "50,000",
+      "eligibility": "12th pass with Maths or Computer Science, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Programming, databases, web development and software engineering."
+    },
+    {
+      "name": "BSc Computer Science",
+      "level": "UG",
+      "aliases": [
+        "bsc cs",
+        "bsc computer science",
+        "bsc in computer science",
+        "b.sc computer science"
+      ],
+      "duration": "3 years",
+      "fee": "45,000",
+      "eligibility": "12th pass with Maths, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Core computer science: programming, data structures, networks and AI basics."
+    },
+    {
+      "name": "BSc Mathematics",
+      "level": "UG",
+      "aliases": [
+        "bsc maths",
+        "bsc mathematics",
+        "bsc in mathematics",
+        "b.sc maths"
+      ],
+      "duration": "3 years",
+      "fee": "35,000",
+      "eligibility": "12th pass with Maths, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Pure and applied mathematics, statistics and computing."
+    },
+    {
+      "name": "MBA",
+      "level": "PG",
+      "aliases": [
+        "master of business administration"
+      ],
+      "duration": "2 years",
+      "fee": "90,000",
+      "eligibility": "Bachelor's degree in any stream, minimum 50%",
+      "selection": "Entrance score (CAT, MAT or KMAT) plus a short interview",
+      "about": "Specializations in Marketing, Finance and HR, with live projects and summer internships."
+    },
+    {
+      "name": "MCom",
+      "level": "PG",
+      "aliases": [
+        "m.com",
+        "master of commerce"
+      ],
+      "duration": "2 years",
+      "fee": "50,000",
+      "eligibility": "BCom or equivalent, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Advanced accounting, financial management, taxation and research methods."
+    },
+    {
+      "name": "MSc Computer Science",
+      "level": "PG",
+      "aliases": [
+        "msc cs",
+        "msc computer science",
+        "msc in computer science",
+        "m.sc computer science",
+        "msc"
+      ],
+      "duration": "2 years",
+      "fee": "60,000",
+      "eligibility": "BSc or BCA with Maths, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Algorithms, machine learning, cloud computing and a final-year research project."
+    }
+  ],
   "intents": [
     {
       "name": "greeting",
@@ -32,7 +142,18 @@
         "hey, can you help me",
         "hlo",
         "good day",
-        "hello, I have a doubt"
+        "hello, I have a doubt",
+        "hi, i need some information",
+        "hello team",
+        "hey, good morning",
+        "hi there, can you help",
+        "vanakkam",
+        "hi sir i have a question",
+        "good morning sir",
+        "hi, anyone available?",
+        "hey, quick question",
+        "namaskara",
+        "hello i want some information"
       ],
       "answer": "Namaste! 🙏 I'm **Veda**, the help desk assistant for **Gyanavedha Institute**.\n\nI can help with:\n- Admissions and eligibility\n- Fees and scholarships\n- Courses, exams and certificates\n- Hostel, bus, library and campus life\n- Placements\n\nWhat would you like to know?"
     },
@@ -54,7 +175,21 @@
         "nothing else, bye",
         "ok i'm leaving",
         "catch you later",
-        "good night"
+        "good night",
+        "ok that's all, thanks and bye",
+        "i am done for today",
+        "alright, see you",
+        "ok nothing more, bye",
+        "signing off now",
+        "bye, will visit again",
+        "ok then, goodbye",
+        "chalo bye",
+        "phir milte hain",
+        "ok thank you bye",
+        "see you soon",
+        "i will leave now",
+        "done, goodbye",
+        "ok that is all for today"
       ],
       "answer": "Thank you for visiting **Gyanavedha Institute**. Have a wonderful day! 🌿"
     },
@@ -76,7 +211,20 @@
         "many thanks",
         "awesome, thank you",
         "got it, appreciate it",
-        "thnx"
+        "thnx",
+        "shukriya",
+        "thank you for the details",
+        "thanks, very helpful",
+        "that really helped, thank you",
+        "thank u so much",
+        "thanks bro",
+        "bahut dhanyavad",
+        "helpful, thanks",
+        "thanks for the info",
+        "this was useful, thanks",
+        "appreciate your help",
+        "great, thanks a ton",
+        "dhanyavad"
       ],
       "answer": "You're welcome! 😊 If you have another question, just type it below."
     },
@@ -102,9 +250,32 @@
         "is there a management quota",
         "how to register for admission",
         "application deadline for MSc",
-        "can final year students apply"
+        "can final year students apply",
+        "admission",
+        "apply",
+        "what do i need to join the college",
+        "how to get a seat in bcom",
+        "requirements for taking admission",
+        "is entrance test compulsory",
+        "what is the last day to submit the application",
+        "admission ke liye kya chahiye",
+        "how can my child join your college",
+        "can i apply with 50 percent marks",
+        "how many seats are available",
+        "what is the application fee",
+        "how do i get a seat in your college",
+        "what are the requirements to join BCom",
+        "is there an entrance test for admission",
+        "when is the last date for admission",
+        "documents to upload while applying",
+        "can i apply with 52 percent"
       ],
-      "answer": "**Admissions (UG and PG)**\n\n- **Applications open:** every March on the institute website\n- **UG eligibility:** 12th pass with at least **50%** marks\n- **PG eligibility:** a bachelor's degree with at least **50%** marks\n- **Selection:** merit-based, using your qualifying marks\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n\n**Next step:** fill the online form, upload your documents and pay the application fee of **₹500**.\n\nNeed help with the form? Call **080-0000-0000**."
+      "answer": "**Admissions (UG and PG)**\n\n- **Applications open:** every March on the institute website\n- **UG eligibility:** 12th pass with at least **50%** marks\n- **PG eligibility:** a bachelor's degree with at least **50%** marks (MBA also needs an entrance score)\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n\n**Next step:** fill the online form, upload your documents and pay the application fee of **₹500**.\n\nFor one program, type its name, for example *MBA eligibility*.",
+      "level_answer": {
+        "UG": "**UG admissions**\n\n- **Eligibility:** 12th pass with at least **50%** marks (BCA and the BSc programs need Maths)\n- **Selection:** merit, based on your 12th marks\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March\n\n**Next step:** fill the online form and pay the application fee of **₹500**.",
+        "PG": "**PG admissions**\n\n- **Eligibility:** a bachelor's degree with at least **50%** marks\n- **Selection:** merit for MCom and MSc, entrance score plus interview for MBA\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March\n\n**Next step:** fill the online form and pay the application fee of **₹500**."
+      },
+      "program_answer": "**{name} admission**\n\n- **Eligibility:** {eligibility}\n- **Selection:** {selection}\n- **Duration:** {duration}\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March (application fee ₹500)\n\nTo see the cost, type *{name} fees*."
     },
     {
       "name": "fees",
@@ -128,9 +299,32 @@
         "is the fee refundable",
         "how much money is needed to join",
         "tuition charges for BCom",
-        "caution deposit amount"
+        "caution deposit amount",
+        "fees",
+        "tuition",
+        "what is the cost for MBA",
+        "tell me the fee of BCA",
+        "how much do i need to pay for mcom",
+        "tuition amount for each year",
+        "is the fee different for each course",
+        "fees kitni lagegi",
+        "kitna fees dena padega",
+        "what are the payment options",
+        "per semester fee details",
+        "how much for one year of bba",
+        "how much will the BBA cost me per year",
+        "what is the annual fee",
+        "can i pay in two parts",
+        "tell me the fee for MCom",
+        "is the fee same for all courses",
+        "fees ka details chahiye"
       ],
-      "answer": "**Fee structure (per year)**\n\n| Program | Tuition |\n|---|---|\n| UG (BCom, BBA, BCA, BSc) | ₹45,000 |\n| PG (MBA, MCom, MSc) | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December.\n\nA late fee of ₹100 per week applies after the due date."
+      "answer": "**Fee structure (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| BCom | ₹40,000 |\n| BBA | ₹50,000 |\n| BCA | ₹50,000 |\n| BSc Computer Science | ₹45,000 |\n| BSc Mathematics | ₹35,000 |\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date.\n\nFor one program, type its name, for example *BBA fees*.",
+      "level_answer": {
+        "UG": "**UG fees (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| BCom | ₹40,000 |\n| BBA | ₹50,000 |\n| BCA | ₹50,000 |\n| BSc Computer Science | ₹45,000 |\n| BSc Mathematics | ₹35,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date.",
+        "PG": "**PG fees (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date."
+      },
+      "program_answer": "**{name} fees**\n\n- **Tuition:** ₹{fee} per year\n- **Duration:** {duration}\n- **Payment:** two installments, in June and December\n\nOptional extras: hostel with mess ₹60,000 per year, college bus ₹12,000 per year.\n\nTo check who can join, type *{name} eligibility*."
     },
     {
       "name": "courses",
@@ -154,9 +348,52 @@
         "what electives are available",
         "which specializations are there in MBA",
         "new courses this year",
-        "programs offered"
+        "programs offered",
+        "ug courses",
+        "pg courses",
+        "ug programs",
+        "pg programs",
+        "show me undergraduate courses",
+        "postgraduate courses list",
+        "BBA",
+        "MBA",
+        "BCom",
+        "BCA",
+        "MCom",
+        "MSc",
+        "tell me about MBA",
+        "about the BCA course",
+        "bsc computer science",
+        "bsc maths",
+        "what is BBA",
+        "courses",
+        "programs",
+        "course list",
+        "courses offered",
+        "courses available",
+        "what can i study at your college",
+        "which subjects can i choose",
+        "do you offer commerce courses",
+        "are science programs available",
+        "what pg degrees are on offer",
+        "how many years does a degree take",
+        "which course is best after 12th",
+        "what specializations are there",
+        "kaun kaun se courses hain",
+        "courses kya kya hain",
+        "what can i study here",
+        "are there any science courses",
+        "do you offer BCA",
+        "mba specializations available?",
+        "which pg programs do you have",
+        "how long is bsc maths"
       ],
-      "answer": "**Programs offered**\n\n**Undergraduate (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc in Computer Science\n- BSc in Mathematics\n\n**Postgraduate (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MSc in Computer Science\n\nThe syllabus follows the university curriculum, with electives and certificate courses added each semester.\n\nFor a program's **eligibility** or **fees**, type its name, for example *BBA fees* or *MBA eligibility*."
+      "answer": "**Programs offered**\n\n**Undergraduate (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc in Computer Science\n- BSc in Mathematics\n\n**Postgraduate (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MSc in Computer Science\n\nThe syllabus follows the university curriculum, with electives and certificate courses added each semester.\n\nFor a program's **eligibility** or **fees**, type its name, for example *BBA fees* or *MBA eligibility*.",
+      "level_answer": {
+        "UG": "**Undergraduate programs (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc Computer Science\n- BSc Mathematics\n\nFor details, type a program name, for example *BCA*.",
+        "PG": "**Postgraduate programs (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MSc Computer Science\n\nFor details, type a program name, for example *MBA*."
+      },
+      "program_answer": "**{name}**\n\n{about}\n\n- **Level:** {level}\n- **Duration:** {duration}\n- **Tuition:** ₹{fee} per year\n- **Eligibility:** {eligibility}"
     },
     {
       "name": "exams",
@@ -180,7 +417,27 @@
         "academic calendar",
         "re-exam dates",
         "how are internal marks calculated",
-        "hall ticket download"
+        "hall ticket download",
+        "exams",
+        "results",
+        "timetable",
+        "what happens if i fail a paper",
+        "can i write the exam again if i fail",
+        "when do the final exams begin",
+        "how and when are results published",
+        "how do i get my hall ticket",
+        "revaluation process for answer sheets",
+        "what is the pass percentage",
+        "are there supplementary exams",
+        "exam kab se start hain",
+        "result kab aayega",
+        "internal marks kaise milte hain",
+        "when do semester exams start",
+        "how do i download the hall ticket",
+        "when are results announced",
+        "what happens if i fail a subject",
+        "can i apply for revaluation",
+        "exam date kya hai"
       ],
       "answer": "**Exams and results**\n\n- **Semester exams:** November and May\n- **Timetable and hall tickets:** published on the student portal **two weeks** before the exams\n- **Results:** announced about **30 days** after the last exam\n- **Revaluation:** apply within 7 days of the results, on the portal\n- **Internal assessment:** 30% of the marks (tests and assignments)\n\nThe pass mark is **40%** in each subject."
     },
@@ -205,7 +462,24 @@
         "can parents visit the hostel",
         "hostel mess menu",
         "is there a warden",
-        "security in the girls hostel"
+        "security in the girls hostel",
+        "hostel",
+        "do you provide rooms for students",
+        "hostel charges per year",
+        "is there a hostel for girls",
+        "what time does the hostel gate close",
+        "is hostel food vegetarian",
+        "hostel mein rehne ki suvidha hai kya",
+        "how many students share a room",
+        "hostel admission process",
+        "mess timings",
+        "can i stay in hostel as a pg student",
+        "do you provide accommodation",
+        "what are the hostel charges",
+        "is there a separate hostel for girls",
+        "what time does hostel close",
+        "is the hostel food veg",
+        "hostel facility hai kya"
       ],
       "answer": "**Hostel facilities**\n\n- Separate hostels for **boys and girls**, inside the campus\n- **Fee:** ₹60,000 per year, including mess\n- **Rooms:** 2 or 3 students sharing, with cots, study tables and wardrobes\n- **Mess:** vegetarian meals, three times a day\n- Wi-Fi, laundry and 24-hour security with a resident warden\n- **Gate closes** at 9 PM for girls and 10 PM for boys\n\n**To apply:** fill the hostel form on the student portal after your admission. Rooms are given on a first-come basis."
     },
@@ -231,7 +505,21 @@
         "documents needed for scholarship",
         "do toppers get free education",
         "minority scholarship details",
-        "scholarships"
+        "scholarships",
+        "is there any concession for toppers",
+        "how do i get financial help",
+        "do you support sc st students with fees",
+        "any sports quota benefits",
+        "can i get a tuition waiver",
+        "scholarship ke liye kaise apply karein",
+        "fee discount for meritorious students",
+        "financial assistance for needy students",
+        "what documents for scholarship",
+        "is any fee concession given to toppers",
+        "scholarship for SC students",
+        "do you give sports scholarships",
+        "can i get a waiver on tuition",
+        "scholarship milega kya"
       ],
       "answer": "**Scholarships and financial aid**\n\n- **Merit scholarship:** up to **50%** tuition waiver for students scoring above 90%\n- **Government scholarships:** SC/ST, OBC and minority scholarships are accepted\n- **Sports quota:** 25% concession for state-level players\n- **Education loans:** the office helps with bank paperwork\n\n**To apply, bring:** your income certificate, caste certificate (if applicable) and last marks card to the office.\n\n**Last date:** 30 days after the term begins."
     },
@@ -257,7 +545,23 @@
         "any tie ups with companies",
         "resume building workshops",
         "on campus drives",
-        "placements"
+        "placements",
+        "which companies recruit from the college",
+        "how much do students earn after the course",
+        "will you help me get a job",
+        "do i have to do an internship",
+        "how many students were placed",
+        "job support after graduation",
+        "placement training provided?",
+        "naukri milti hai kya",
+        "package kitna milta hai",
+        "what jobs can i get after bba",
+        "which companies come for recruitment",
+        "what is the average salary of students",
+        "do you help with jobs after graduation",
+        "is internship compulsory",
+        "how many students got placed last year",
+        "placement kaisa hai"
       ],
       "answer": "**Placements and careers**\n\n- An active **placement cell** with campus drives every year\n- **40+ companies** visit the campus\n- **Training:** aptitude, communication, resume building and mock interviews\n- **Internships** in the final year\n- **Last year:** highest package ₹8 LPA, average ₹3.6 LPA\n\nWe provide placement support, but jobs are not guaranteed."
     },
@@ -281,7 +585,24 @@
         "convocation certificate collection",
         "name correction in certificate",
         "how much does a duplicate certificate cost",
-        "certificate for passport verification"
+        "certificate for passport verification",
+        "certificate",
+        "bonafide",
+        "how to get a transfer certificate",
+        "where do i apply for a study certificate",
+        "bonafide for scholarship application",
+        "what if i lose my marksheet",
+        "time taken to get a character certificate",
+        "duplicate marks card charges",
+        "original degree when will i get it",
+        "certificate kaise milega",
+        "tc kab milega",
+        "how do i get my TC",
+        "i need a bonafide certificate for scholarship",
+        "lost my marks card, what now",
+        "how many days for a study certificate",
+        "where to apply for migration certificate",
+        "duplicate certificate fees"
       ],
       "answer": "**Certificates and documents**\n\n- **Bonafide, study and character certificates:** 2 to 3 working days\n- **Transfer and migration certificates:** 5 working days\n- **Duplicate marks card:** ₹200, about 7 working days\n- **Original degree:** issued at the convocation\n\n**How to apply:** use the student portal, or submit a request at the office counter with your ID card."
     },
@@ -306,7 +627,21 @@
         "city bus to the campus",
         "what is the last bus timing",
         "pickup point near my house",
-        "do you provide cab service"
+        "do you provide cab service",
+        "bus",
+        "how much does the bus cost",
+        "is there a pickup point near my home",
+        "what time does the morning bus come",
+        "can i bring my bike to college",
+        "bus ka fee kitna hai",
+        "which areas does the bus cover",
+        "college bus time table",
+        "vehicle parking facility",
+        "what are the bus charges",
+        "is there a pickup near my area",
+        "morning bus time",
+        "can i park my bike in college",
+        "bus ka timing kya hai"
       ],
       "answer": "**College bus service**\n\n- **8 city routes**, morning pickup from **7:30 AM**\n- Return buses leave at **4:30 PM** and **5:30 PM**\n- **Fee:** ₹12,000 per year\n- Bike and car **parking** is available on campus\n\n**To register:** collect the bus form at the office and choose your pickup point. Route maps are on the notice board."
     },
@@ -332,7 +667,21 @@
         "can I visit the campus",
         "what is the helpline number",
         "how do I meet the principal",
-        "is the office open on saturday"
+        "is the office open on saturday",
+        "what is the college phone number",
+        "can i speak to someone in the office",
+        "email id of the college",
+        "where exactly is the college",
+        "is the office open on sundays",
+        "contact number for admissions",
+        "office ka number do",
+        "college ka address kya hai",
+        "who can i call for help",
+        "what is your phone number",
+        "can i talk to someone from the office",
+        "college email id",
+        "where is the college",
+        "i want to meet the principal"
       ],
       "answer": "**Contact the office**\n\n- 📞 **080-0000-0000**\n- ✉️ **help@gyanavedha.example**\n- 🕘 **Monday to Saturday**, 9 AM to 4 PM\n- 📍 Administrative block, ground floor\n\nFor admission help, ask for the **admission counsellor**. You can also walk in during office hours."
     },
@@ -356,7 +705,21 @@
         "is there a study room",
         "newspapers and magazines",
         "library rules",
-        "library open on sundays"
+        "library open on sundays",
+        "does the college have a library",
+        "how many books can a student issue",
+        "library open timings",
+        "are e-books available",
+        "what is the fine for late return",
+        "can i sit and read in the library",
+        "library membership kaise milega",
+        "library kab tak khula rehta hai",
+        "is there a library on campus",
+        "how many books can i issue",
+        "library opening hours",
+        "do you have e-books",
+        "fine for returning books late",
+        "can i study in the library"
       ],
       "answer": "**Library**\n\n- **Timings:** 8 AM to 6 PM, Monday to Saturday\n- **Collection:** 25,000+ books, journals and newspapers\n- **Digital library** with e-journals, available on the campus Wi-Fi\n- **Borrowing:** UG students up to **3 books**, PG students up to **5 books**, for 14 days\n- **Late fine:** ₹2 per day per book\n\nYour college ID card is your library card."
     },
@@ -382,7 +745,21 @@
         "do you have an atm on campus",
         "what amenities do students get",
         "is there a seminar hall",
-        "photocopy and stationery shop"
+        "photocopy and stationery shop",
+        "is wifi available in college",
+        "is there a canteen on campus",
+        "does the college have a sports ground",
+        "computer lab facilities",
+        "is there a medical room",
+        "campus mein kya kya suvidhayen hain",
+        "is there a playground for students",
+        "are classrooms air conditioned",
+        "college mein wifi hai kya",
+        "is there wifi in college",
+        "are there sports grounds",
+        "is there a computer lab",
+        "medical room on campus",
+        "any gym facilities"
       ],
       "answer": "**Campus facilities**\n\n- **Free Wi-Fi** across the campus\n- **Computer and science labs**\n- **Canteen** serving snacks and meals\n- **Sports:** playground, indoor games and a gym\n- **Auditorium** and seminar hall\n- **First-aid room** with a visiting doctor\n- ATM and a stationery shop"
     },
@@ -408,7 +785,23 @@
         "hackathon in college",
         "who organises the events",
         "how to join a student club",
-        "annual sports meet dates"
+        "annual sports meet dates",
+        "fest",
+        "events",
+        "when is the annual college fest",
+        "are there cultural programs in college",
+        "do you hold tech events or hackathons",
+        "when is sports day",
+        "how do i join a club",
+        "annual day kab hai",
+        "college mein events hote hain kya",
+        "student clubs list",
+        "when is the annual fest",
+        "are there student clubs",
+        "do you conduct cultural programs",
+        "any hackathons or tech events",
+        "sports day date",
+        "can i join the coding club"
       ],
       "answer": "**Events and student life**\n\n- **Annual fest** every February, with music, dance, tech and sports events\n- **Annual day** in March and **freshers' day** in August\n- **Clubs:** coding, literary, cultural and sports\n- **NSS** and **NCC** units\n- Inter-college competitions and workshops each semester\n\nClubs open for joining in the first month of the term."
     },
@@ -433,7 +826,21 @@
         "are the faculty experienced",
         "what is the student teacher ratio",
         "does the college have a good reputation",
-        "is the college autonomous"
+        "is the college autonomous",
+        "is your college approved by ugc",
+        "which university is the college affiliated with",
+        "what is naac grade of the college",
+        "tell me about your institute",
+        "how are the teachers",
+        "why should i join your college",
+        "what makes this college special",
+        "is the college good",
+        "college ke baare mein batao",
+        "is the college naac accredited",
+        "tell me something about your institute",
+        "how good is the faculty",
+        "is it UGC approved",
+        "what is special about your college"
       ],
       "answer": "**About Gyanavedha Institute**\n\nA UG and PG college offering programs in commerce, management and computer science.\n\n- Affiliated to the state university\n- Approved by UGC and accredited by NAAC\n- Experienced faculty, with a student-teacher ratio of about **20:1**\n- A campus with library, labs, hostel and bus service\n\n*This is a fictional demo college, so these details are sample data.*"
     },
@@ -453,8 +860,23 @@
         "alright",
         "ok sure",
         "yes i want",
-        "of course",
-        "please do"
+        "please do",
+        "yes ok",
+        "yes sure",
+        "okay yes",
+        "yeah sure",
+        "ok go ahead",
+        "yes pls",
+        "yes go ahead",
+        "ok continue",
+        "ji haan",
+        "sure, go on",
+        "yes i would like that",
+        "yup",
+        "yeah please",
+        "yes go on",
+        "haan ji",
+        "alright, continue"
       ],
       "answer": "Happy to help! 😊 Please type what you'd like to know, for example:\n- *BBA fees*\n- *MBA eligibility*\n- *hostel for girls*\n- *last date to apply*"
     },
@@ -472,7 +894,19 @@
         "i'm good",
         "no more questions",
         "no not required",
-        "no i am fine"
+        "no i am fine",
+        "no no",
+        "not needed",
+        "no it's okay",
+        "no not now",
+        "nothing more",
+        "no, that's okay",
+        "no more questions please",
+        "not now thanks",
+        "no i am good",
+        "nope, nothing else",
+        "not required",
+        "nahi chahiye"
       ],
       "answer": "No problem! If you think of anything later, just type your question. 🌿"
     }

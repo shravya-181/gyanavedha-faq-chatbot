@@ -80,3 +80,11 @@ def test_dataset_checks_find_duplicates_and_conflicts(tmp_path):
 def test_dataset_checks_are_quiet_for_a_clean_file(paths):
     warnings = dataset_checks(paths[0])
     assert not any("Conflict" in w or "repeats" in w for w in warnings)
+
+
+def test_holdout_questions_are_not_in_training():
+    """The fresh-question test is only honest if the bot never trained on it."""
+    from chatbot.evaluate import evaluate_holdout
+    result = evaluate_holdout("data/faqs.json", "data/holdout.json")
+    assert result["leaked"] == []
+    assert result["questions"] >= 100

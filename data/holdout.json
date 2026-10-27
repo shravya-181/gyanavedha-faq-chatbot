@@ -1,0 +1,162 @@
+{
+  "greeting": [
+    "hi good evening",
+    "hello! can someone help me",
+    "hey i have a few questions",
+    "namaste sir",
+    "good afternoon, i need information"
+  ],
+  "goodbye": [
+    "that's everything, bye",
+    "ok i'm off now",
+    "talk later",
+    "thanks, see you",
+    "no more doubts, bye bye",
+    "will check again tomorrow, bye"
+  ],
+  "thanks": [
+    "thank you for helping",
+    "got my answer, thanks",
+    "nice, thank you",
+    "thanks a lot for your time",
+    "really appreciate it",
+    "ok great thanks"
+  ],
+  "admission": [
+    "what is needed to get admitted in mba",
+    "where do i submit the application form",
+    "last date for applying to the college",
+    "can i get admission without entrance exam",
+    "what is the eligibility for bsc computer science",
+    "how does the selection happen",
+    "admission procedure for pg students",
+    "what all documents should i carry for admission"
+  ],
+  "fees": [
+    "how much is the yearly fee for bcom",
+    "is there any extra charge apart from tuition",
+    "tuition for msc",
+    "can the fee be paid online",
+    "what if i pay the fee late",
+    "fee structure of undergraduate courses",
+    "how much total for the mba course",
+    "fee installment possible?"
+  ],
+  "courses": [
+    "what undergraduate programs are available",
+    "can i take computer science here",
+    "is mcom offered by your college",
+    "what subjects come in bba",
+    "duration of bca",
+    "tell me the list of pg courses",
+    "do you have any diploma or certificate programs",
+    "which stream should i pick for commerce"
+  ],
+  "exams": [
+    "when is the next exam",
+    "where can i find the exam schedule",
+    "what is the minimum mark to pass",
+    "results date for last semester",
+    "how to apply for re-evaluation",
+    "when will i get my hall ticket",
+    "how many internals are there",
+    "when do classes for the new semester begin"
+  ],
+  "hostel": [
+    "is hostel accommodation provided for outstation students",
+    "how much do i need to pay for hostel",
+    "hostel rules for girls",
+    "is food provided in the hostel",
+    "are rooms shared",
+    "how do i book a hostel room",
+    "does the hostel have wifi",
+    "hostel gate timing"
+  ],
+  "scholarship": [
+    "do you provide scholarships for good students",
+    "scholarship application process",
+    "is there any aid for economically weak students",
+    "do obc students get fee benefits",
+    "what marks are required for scholarship",
+    "can i get an education loan through the college",
+    "are there sports scholarships",
+    "last date to apply for scholarship"
+  ],
+  "placements": [
+    "do students get jobs after completing the course",
+    "name some companies that hire from your college",
+    "what is the highest package",
+    "is there a placement cell in college",
+    "do you provide interview training",
+    "how many companies visit every year",
+    "internship opportunities for students",
+    "what is the average package"
+  ],
+  "certificates": [
+    "how can i obtain my bonafide certificate",
+    "process for getting a transfer certificate",
+    "how long does it take to issue a migration certificate",
+    "where do i get a duplicate marksheet",
+    "need a certificate for bank loan",
+    "when will i receive my degree certificate",
+    "i lost my id card and marks card",
+    "how to correct my name in a certificate"
+  ],
+  "transport": [
+    "is bus facility available",
+    "what is the yearly bus fee",
+    "where does the college bus stop in my area",
+    "what are the bus timings",
+    "do you have transport from the railway station",
+    "is two wheeler parking allowed",
+    "which routes does the college bus run on"
+  ],
+  "contact_office": [
+    "how can i reach the college office",
+    "where is your campus located",
+    "give me the email for queries",
+    "at what time does the office open",
+    "can i visit the college for enquiry",
+    "who do i contact for admission help",
+    "is there a whatsapp number for queries"
+  ],
+  "library": [
+    "what are the library timings",
+    "can students borrow books",
+    "is a digital library available",
+    "how many days can i keep a book",
+    "what is the library fine",
+    "are previous year question papers in the library",
+    "do i need a card for the library"
+  ],
+  "campus_facilities": [
+    "are there science labs",
+    "is free wifi provided on campus",
+    "do you have a playground and gym",
+    "can i get first aid on campus",
+    "is there an atm in college"
+  ],
+  "events": [
+    "does the college organize fests",
+    "which student clubs can i join",
+    "when does the annual day happen",
+    "are there national service scheme units",
+    "do students take part in inter college sports",
+    "is there a tech fest"
+  ],
+  "about_college": [
+    "when was the college started",
+    "is the college accredited",
+    "how many students study in the college",
+    "what is the faculty strength",
+    "is this a private college",
+    "is the degree recognised by the university"
+  ],
+  "affirmation": [
+    "yes sure go on"
+  ],
+  "negation": [
+    "not really",
+    "no that's all"
+  ]
+}

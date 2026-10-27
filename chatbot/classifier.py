@@ -15,6 +15,30 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 from chatbot.preprocess import clean_text
 
 
+def make_pipeline() -> Pipeline:
+    """Build a fresh, untrained text-classification pipeline.
+
+    It lives in its own function so the Bot Doctor can build identical copies
+    for testing the bot's accuracy.
+
+    Text -> numbers (TF-IDF) -> intent probabilities (logistic regression).
+    We build TWO kinds of TF-IDF features and combine them:
+      - word features (1-2 words, e.g. "hostel fee")
+      - character features (2-5 letters inside words), which still match
+        when there are typos ("accomodation") or Hinglish words.
+    C=50 lets the model be more decisive; a small dataset gives very timid
+    probabilities with the default C=1.
+    """
+    features = FeatureUnion([
+        ("words", TfidfVectorizer(ngram_range=(1, 2))),
+        ("chars", TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5))),
+    ])
+    return Pipeline([
+        ("tfidf", features),
+        ("clf", LogisticRegression(C=50, max_iter=2000)),
+    ])
+
+
 class IntentClassifier:
     def __init__(self, faq_path: str):
         # 1. Load the FAQ file.
@@ -24,6 +48,11 @@ class IntentClassifier:
         self.business_name = data["business_name"]
         self.fallback_reply = data["fallback_reply"]
         self.threshold = data["confidence_threshold"]
+        # Optional: the programs (BBA, MBA...) and per-intent answer templates
+        # that let the bot answer for one program or for UG / PG.
+        self.programs = data.get("programs", [])
+        self.extras = {i["name"]: {k: i[k] for k in ("program_answer", "level_answer") if k in i}
+                       for i in data["intents"]}
 
         # 2. Build the training data:
         #    X = cleaned example sentences, y = the intent each one belongs to.
@@ -35,22 +64,10 @@ class IntentClassifier:
                 X.append(clean_text(example))
                 y.append(intent["name"])
 
-        # 3. Pipeline = text -> numbers (TF-IDF) -> intent probabilities
-        #    (logistic regression).
-        #    We build TWO kinds of TF-IDF features and combine them:
-        #      - word features (1-2 words, e.g. "hostel fee")
-        #      - character features (2-5 letters inside words), which still
-        #        match when there are typos ("accomodation") or Hinglish words.
-        #    C=50 lets the model be more decisive; a small dataset gives very
-        #    timid probabilities with the default C=1.
-        features = FeatureUnion([
-            ("words", TfidfVectorizer(ngram_range=(1, 2))),
-            ("chars", TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 5))),
-        ])
-        self.model = Pipeline([
-            ("tfidf", features),
-            ("clf", LogisticRegression(C=50, max_iter=2000)),
-        ])
+        # 3. Keep the training data (the Bot Doctor needs it) and build the model.
+        self.X, self.y = X, y
+        self.raw_examples = [e for i in data["intents"] for e in i["examples"]]
+        self.model = make_pipeline()
 
         # 4. Learn from the examples.
         self.model.fit(X, y)
@@ -108,12 +125,7 @@ if __name__ == "__main__":
         "when will my results come out",
         "what is the capital of France",
         "???",
-        "what about placments?"
-        "highest salary package for pg?"
-        "does the fees must be paid in one shot?"
-        "is there any annual fest?"
-        "what is the capital of india?"
-    ]   
+    ]
     for q in questions:
         r = bot.predict(q)
         label = "FALLBACK" if r["is_fallback"] else r["intent"]

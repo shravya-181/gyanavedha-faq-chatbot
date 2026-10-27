@@ -15,6 +15,9 @@ from chatbot.logger import DEFAULT_PATH, log_feedback, read_feedback, read_unans
 FAQ_PATH = "data/faqs.json"
 SKIP_INTENTS = {"greeting", "goodbye", "thanks"}
 
+# Coming back to the chat page logs staff out of the Bot Doctor.
+st.session_state["staff_ok"] = False
+
 st.set_page_config(page_title="Institute Help Desk", page_icon="🎓",
                    initial_sidebar_state="collapsed")
 
@@ -195,7 +198,7 @@ def stream_words(text: str):
 
 def ask(text: str) -> None:
     """Send one customer message to the bot and store both sides of the chat."""
-    result = bot.reply(text)
+    result = bot.reply(text, st.session_state.context)
     st.session_state.messages.append({"role": "user", "content": text})
     st.session_state.messages.append({
         "role": "assistant", "content": result["text"], "details": result["details"],
@@ -219,6 +222,7 @@ with st.sidebar:
     show_details = st.checkbox("Show how the bot decided", value=False)
     if st.button("Clear chat"):
         st.session_state.pop("messages", None)
+        st.session_state.pop("context", None)
         st.rerun()
 
     st.header("Activity")
@@ -237,11 +241,24 @@ if "messages" not in st.session_state:
         "details": [], "question": "", "animate": False,
     }]
 
+# What the bot remembers about this visitor (program, UG/PG, last topic).
+if "context" not in st.session_state:
+    st.session_state.context = {}
+
 # Handle typed input first, so everything below already knows about it.
 typed = st.chat_input("Ask about fees, hostel, admission...")
 if typed:
     ask(typed)
 
+
+# Show what the bot has remembered, with a button to forget it.
+_remembered = st.session_state.context.get("program") or st.session_state.context.get("level")
+if _remembered:
+    note, forget = st.columns([4, 1])
+    note.caption(f"🎓 Answering for **{_remembered}**")
+    if forget.button("Forget", key="forget_program"):
+        st.session_state.context.clear()
+        st.rerun()
 
 # ---------------- Question list ----------------
 def question_buttons() -> None:

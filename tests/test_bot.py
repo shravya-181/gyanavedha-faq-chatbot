@@ -160,3 +160,60 @@ def test_real_faq_file_is_well_formed():
     for intent in data["intents"]:
         assert len(intent["examples"]) >= 5, f"{intent['name']} needs more examples"
         assert intent["answer"].strip(), f"{intent['name']} has an empty answer"
+
+
+# ---------------- course awareness ----------------
+COURSE_FAQ = dict(TEST_FAQ)
+COURSE_FAQ["programs"] = [
+    {"name": "BBA", "level": "UG", "aliases": ["bachelor of business administration"],
+     "fee": "50,000", "duration": "3 years"},
+    {"name": "MBA", "level": "PG", "aliases": [], "fee": "90,000", "duration": "2 years"},
+]
+COURSE_FAQ["intents"] = [dict(i) for i in TEST_FAQ["intents"]]
+for _i in COURSE_FAQ["intents"]:
+    if _i["name"] == "fees":
+        _i["program_answer"] = "{name} costs Rs {fee}"
+        _i["level_answer"] = {"UG": "UG_FEES", "PG": "PG_FEES"}
+
+
+@pytest.fixture
+def course_bot(tmp_path):
+    path = tmp_path / "faqs.json"
+    path.write_text(json.dumps(COURSE_FAQ), encoding="utf-8")
+    return Chatbot(str(path), str(tmp_path / "log.csv"))
+
+
+def test_program_in_message_gives_program_answer(course_bot):
+    assert "BBA costs Rs 50,000" in course_bot.reply("what is the BBA fee structure", {})["text"]
+
+
+def test_bot_remembers_program(course_bot):
+    context = {}
+    course_bot.reply("what is the BBA fee structure", context)
+    text = course_bot.reply("how much is the tuition fee", context)["text"]
+    assert "BBA costs Rs 50,000" in text and "as you asked earlier" in text
+
+
+def test_follow_up_what_about_other_program(course_bot):
+    context = {}
+    course_bot.reply("what is the BBA fee structure", context)
+    assert "MBA costs Rs 90,000" in course_bot.reply("what about MBA", context)["text"]
+
+
+def test_level_answer_for_ug(course_bot):
+    assert course_bot.reply("fee details for ug students", {})["text"] == "UG_FEES"
+
+
+def test_reset_forgets_program(course_bot):
+    context = {}
+    course_bot.reply("what is the BBA fee structure", context)
+    course_bot.reply("reset", context)
+    assert course_bot.reply("how much is the tuition fee", context)["text"] == "FEES_ANSWER"
+
+
+def test_without_context_still_works(course_bot):
+    assert course_bot.reply("how much is the tuition fee")["text"] == "FEES_ANSWER"
+
+
+def test_three_dots_make_no_pieces():
+    assert split_message("hello... fees") == ["hello", "fees"]

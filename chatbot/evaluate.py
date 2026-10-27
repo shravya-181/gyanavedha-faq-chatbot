@@ -123,6 +123,37 @@ def evaluate(faq_path: str = "data/faqs.json", oos_path: str = OOS_PATH,
     return result
 
 
+def evaluate_holdout(faq_path: str = "data/faqs.json",
+                     holdout_path: str = "data/holdout.json") -> dict:
+    """Test the bot on questions that are NOT in its training examples.
+
+    data/holdout.json holds fresh questions per intent. Never copy them into
+    faqs.json: that would make the score look better than it really is.
+    Returns accuracy (best guess = right intent), the per-intent scores and the misses.
+    """
+    with open(holdout_path, encoding="utf-8") as f:
+        holdout = json.load(f)
+    bot = IntentClassifier(faq_path)
+    trained = {e.lower() for e in bot.raw_examples}
+    leaked = [q for qs in holdout.values() for q in qs if q.lower() in trained]
+    total = right = 0
+    per_intent, misses = [], []
+    for intent, questions in holdout.items():
+        hit = 0
+        for q in questions:
+            guess = bot.predict(q)["top_matches"][0][0]
+            total += 1
+            if guess == intent:
+                hit += 1
+                right += 1
+            else:
+                misses.append({"question": q, "expected": intent, "got": guess})
+        per_intent.append({"intent": intent, "tested": len(questions),
+                           "accuracy": round(hit / len(questions), 2) if questions else None})
+    return {"questions": total, "accuracy": round(right / total, 3) if total else None,
+            "per_intent": per_intent, "misses": misses, "leaked": leaked}
+
+
 def dataset_checks(faq_path: str = "data/faqs.json") -> list:
     """Warnings about the FAQ file itself (cheap checks that catch real problems)."""
     with open(faq_path, encoding="utf-8") as f:
@@ -174,6 +205,14 @@ if __name__ == "__main__":
         print(f"{s['threshold']:<10} {s['answered_correctly']:<15} {s['answered_wrongly']:<15} "
               f"{s['refused']:<8} {s.get('out_of_scope_rejected', '-'):<18} {s.get('balanced_score', '-')}")
     print(f"\nCurrent threshold: {r['current_threshold']}   Best by balanced score: {r['best_threshold']}")
+    if Path("data/holdout.json").exists():
+        h = evaluate_holdout()
+        print(f"\nFresh-question test: {h['accuracy']:.0%} correct "
+              f"({h['questions']} questions the bot never trained on)")
+        for m in h["misses"]:
+            print(f"  missed: {m['question']!r} -> {m['got']} (expected {m['expected']})")
+        if h["leaked"]:
+            print(f"  WARNING: {len(h['leaked'])} of these are also in faqs.json, remove them from holdout.json")
     print("\nDataset checks:")
     for w in dataset_checks() or ["No problems found."]:
         print(" -", w)
