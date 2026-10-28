@@ -11,6 +11,7 @@ import re
 
 from chatbot.classifier import IntentClassifier
 from chatbot.logger import DEFAULT_PATH, log_unanswered
+from chatbot.preprocess import clean_text
 
 # Words that mean UG or PG. (Program names come from faqs.json, not from here.)
 LEVEL_WORDS = {
@@ -65,6 +66,42 @@ class Chatbot:
                         best = (len(a), prog)
         return best[1] if best else None
 
+    def find_programs(self, text: str) -> list:
+        """Return EVERY program mentioned, in the order they appear.
+
+        "BBA and MBA fees" -> [BBA, MBA].  If one name sits inside another
+        ("msc" inside "msc computer science") the longer name wins.
+        """
+        t = normalise(text)
+        hits = []                                   # (start, end, program)
+        for prog in self.programs.values():
+            for alias in [prog["name"], *prog.get("aliases", [])]:
+                a = normalise(alias)
+                for m in re.finditer(rf"(?<!\w){re.escape(a)}(?!\w)", t):
+                    hits.append((m.start(), m.end(), prog))
+        hits.sort(key=lambda h: h[0] - h[1])        # longest first
+        taken, chosen = [], []
+        for start, end, prog in hits:
+            if any(start < e and s < end for s, e in taken):
+                continue                            # overlaps a longer match
+            taken.append((start, end))
+            chosen.append((start, prog))
+        found = []
+        for _, prog in sorted(chosen, key=lambda c: c[0]):
+            if prog not in found:
+                found.append(prog)
+        return found
+
+    def strip_programs(self, text: str) -> str:
+        """The question with every program name removed: "fees of BBA and MBA" -> "fees of and".
+        Program names are strong words, so they can hide the real topic."""
+        aliases = sorted({normalise(a) for p in self.programs.values()
+                          for a in [p["name"], *p.get("aliases", [])]}, key=len, reverse=True)
+        if not aliases:
+            return text
+        pattern = "|".join(re.escape(a) for a in aliases)
+        return re.sub(rf"(?<!\w)(?:{pattern})(?!\w)", " ", normalise(text))
+
     @staticmethod
     def find_level(text: str):
         t = normalise(text)
@@ -106,7 +143,10 @@ class Chatbot:
 
         pieces = []
         for piece in split_message(message) or [message]:
-            pieces.extend(self._split_on_and(piece))
+            if len(self.find_programs(piece)) > 1:   # "BBA and MBA fees": keep whole
+                pieces.append(piece)
+            else:
+                pieces.extend(self._split_on_and(piece))
 
         details = []          # one prediction per piece
         answers = []          # replies we are confident about
@@ -114,7 +154,8 @@ class Chatbot:
         seen = set()          # so two "placement" questions give one answer
 
         for piece in pieces:
-            program = self.find_program(piece)
+            found = self.find_programs(piece)
+            program = found[-1] if found else None   # the last one is remembered
             level = self.find_level(piece)
             if program:
                 context["program"], context["level"] = program["name"], program["level"]
@@ -123,8 +164,20 @@ class Chatbot:
 
             result = self.classifier.predict(piece)
             result["question"] = piece
-            intent = result["intent"]
             has_template = lambda name: "program_answer" in self.classifier.extras.get(name, {})  # noqa: E731
+
+            # A program name can hide the real topic ("fees of BBA, MBA and MCom"
+            # looks like "courses"). Ask again without the names: if that clearly
+            # says fees or admission, trust it.
+            if found and result["intent"] in (None, "courses"):
+                rest = self.strip_programs(piece)
+                if clean_text(rest):
+                    alt = self.classifier.predict(rest)
+                    if (not alt["is_fallback"] and alt["intent"] != "courses"
+                            and has_template(alt["intent"])):
+                        result.update(intent=alt["intent"], confidence=alt["confidence"],
+                                      is_fallback=False, answer=alt["answer"])
+            intent = result["intent"]
 
             # "what about MBA?" -> repeat the last topic for the new program.
             if program and (result["is_fallback"]
@@ -150,6 +203,18 @@ class Chatbot:
             if has_template(intent) or intent in self.classifier.extras and \
                     "level_answer" in self.classifier.extras[intent]:
                 context["last_intent"] = intent
+            if len(found) > 1 and has_template(intent):
+                # "BBA and MBA fees": one answer for each program mentioned (max 4)
+                for prog in found[:4]:
+                    key = (intent, prog["name"], prog["level"])
+                    if key not in seen:
+                        seen.add(key)
+                        answers.append(self._answer_for(
+                            intent, {"program": prog["name"], "level": prog["level"]}, False))
+                if len(found) > 4:
+                    answers.append("*I showed the first 4 programs. Ask about the others "
+                                   "separately and I'll answer them too.*")
+                continue
             key = (intent, context.get("program"), context.get("level"))
             if key not in seen:
                 seen.add(key)
@@ -182,7 +247,7 @@ class Chatbot:
     def _compose(self, answers: list, unanswered: list) -> str:
         if not answers:
             return self.classifier.fallback_reply
-        text = "\n\n".join(answers)
+        text = "\n\n---\n\n".join(answers)
         if unanswered:
             quoted = "; ".join(f'"{q}"' for q in unanswered)
             text += (f"\n\nI couldn't answer: {quoted}. "

@@ -217,3 +217,25 @@ def test_without_context_still_works(course_bot):
 
 def test_three_dots_make_no_pieces():
     assert split_message("hello... fees") == ["hello", "fees"]
+
+
+# ---------------- several programs in one message ----------------
+def test_two_questions_two_programs(course_bot):
+    text = course_bot.reply("what is the BBA fee structure? what about MBA?", {})["text"]
+    assert "BBA costs Rs 50,000" in text and "MBA costs Rs 90,000" in text
+
+
+def test_two_programs_in_one_question(course_bot):
+    text = course_bot.reply("what is the fee structure for BBA and MBA", {})["text"]
+    assert "BBA costs Rs 50,000" in text and "MBA costs Rs 90,000" in text
+
+
+def test_programs_answered_in_the_order_asked(course_bot):
+    text = course_bot.reply("what is the fee structure for MBA and BBA", {})["text"]
+    assert text.index("MBA costs") < text.index("BBA costs")
+
+
+def test_last_program_is_remembered(course_bot):
+    context = {}
+    course_bot.reply("what is the fee structure for BBA and MBA", context)
+    assert context["program"] == "MBA"
