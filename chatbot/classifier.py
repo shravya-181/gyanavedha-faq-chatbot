@@ -51,6 +51,8 @@ class IntentClassifier:
         # Optional: the programs (BBA, MBA...) and per-intent answer templates
         # that let the bot answer for one program or for UG / PG.
         self.programs = data.get("programs", [])
+        self.not_offered = data.get("not_offered", [])      # degrees we do not offer (BA, MTech...)
+        self.ambiguous = data.get("ambiguous", {})           # {"bsc": ["BSc CS", "BSc Maths"]}
         self.extras = {i["name"]: {k: i[k] for k in ("program_answer", "level_answer") if k in i}
                        for i in data["intents"]}
 

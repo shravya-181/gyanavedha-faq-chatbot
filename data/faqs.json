@@ -107,6 +107,19 @@
       "about": "Advanced accounting, financial management, taxation and research methods."
     },
     {
+      "name": "MCA",
+      "level": "PG",
+      "aliases": [
+        "master of computer applications",
+        "m.c.a"
+      ],
+      "duration": "2 years",
+      "fee": "70,000",
+      "eligibility": "BCA, or a bachelor's degree with Maths, minimum 50%",
+      "selection": "Merit, based on your qualifying marks",
+      "about": "Advanced programming, software engineering, cloud computing and databases, with a final-year project."
+    },
+    {
       "name": "MSc Computer Science",
       "level": "PG",
       "aliases": [
@@ -123,6 +136,30 @@
       "about": "Algorithms, machine learning, cloud computing and a final-year research project."
     }
   ],
+  "not_offered": [
+    "BA",
+    "MA",
+    "BTech",
+    "MTech",
+    "BEd",
+    "MEd",
+    "LLB",
+    "LLM",
+    "BPharm",
+    "MPharm",
+    "MBBS",
+    "BDS",
+    "BSW",
+    "MSW",
+    "BArch",
+    "BHM"
+  ],
+  "ambiguous": {
+    "BSc": [
+      "BSc Computer Science",
+      "BSc Mathematics"
+    ]
+  },
   "intents": [
     {
       "name": "greeting",
@@ -275,7 +312,7 @@
         "UG": "**UG admissions**\n\n- **Eligibility:** 12th pass with at least **50%** marks (BCA and the BSc programs need Maths)\n- **Selection:** merit, based on your 12th marks\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March\n\n**Next step:** fill the online form and pay the application fee of **₹500**.",
         "PG": "**PG admissions**\n\n- **Eligibility:** a bachelor's degree with at least **50%** marks\n- **Selection:** merit for MCom and MSc, entrance score plus interview for MBA\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March\n\n**Next step:** fill the online form and pay the application fee of **₹500**."
       },
-      "program_answer": "**{name} admission**\n\n- **Eligibility:** {eligibility}\n- **Selection:** {selection}\n- **Duration:** {duration}\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March (application fee ₹500)\n\nTo see the cost, type *{name} fees*."
+      "program_answer": "**{name} admission**\n\n- **Eligibility:** {eligibility}\n- **Selection:** {selection}\n- **Duration:** {duration}\n- **Documents:** marks cards, ID proof, passport photos and transfer certificate\n- **Applications open:** every March (application fee ₹500)\n\n**You can also ask about:** *scholarships*, *hostel*, *placements* or *last date to apply*."
     },
     {
       "name": "fees",
@@ -319,12 +356,12 @@
         "is the fee same for all courses",
         "fees ka details chahiye"
       ],
-      "answer": "**Fee structure (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| BCom | ₹40,000 |\n| BBA | ₹50,000 |\n| BCA | ₹50,000 |\n| BSc Computer Science | ₹45,000 |\n| BSc Mathematics | ₹35,000 |\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date.\n\nFor one program, type its name, for example *BBA fees*.",
+      "answer": "**Fee structure (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| BCom | ₹40,000 |\n| BBA | ₹50,000 |\n| BCA | ₹50,000 |\n| BSc Computer Science | ₹45,000 |\n| BSc Mathematics | ₹35,000 |\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MCA | ₹70,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date.\n\nFor one program, type its name, for example *BBA fees*.",
       "level_answer": {
         "UG": "**UG fees (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| BCom | ₹40,000 |\n| BBA | ₹50,000 |\n| BCA | ₹50,000 |\n| BSc Computer Science | ₹45,000 |\n| BSc Mathematics | ₹35,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date.",
-        "PG": "**PG fees (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date."
+        "PG": "**PG fees (per year)**\n\n| Program | Tuition per year |\n|---|---|\n| MBA | ₹90,000 |\n| MCom | ₹50,000 |\n| MCA | ₹70,000 |\n| MSc Computer Science | ₹60,000 |\n\n**Optional extras**\n- Hostel with mess: ₹60,000 per year\n- College bus: ₹12,000 per year\n\n**How to pay:** online through the student portal (UPI, cards or net banking), in **two installments**: June and December. A late fee of ₹100 per week applies after the due date."
       },
-      "program_answer": "**{name} fees**\n\n- **Tuition:** ₹{fee} per year\n- **Duration:** {duration}\n- **Payment:** two installments, in June and December\n\nOptional extras: hostel with mess ₹60,000 per year, college bus ₹12,000 per year.\n\nTo check who can join, type *{name} eligibility*."
+      "program_answer": "**{name} fees**\n\n- **Tuition:** ₹{fee} per year\n- **Duration:** {duration}\n- **Payment:** two installments, in June and December\n\nOptional extras: hostel with mess ₹60,000 per year, college bus ₹12,000 per year.\n\n**You can also ask about:** *{name} eligibility*, *hostel*, *scholarships* or *placements*."
     },
     {
       "name": "courses",
@@ -386,14 +423,17 @@
         "do you offer BCA",
         "mba specializations available?",
         "which pg programs do you have",
-        "how long is bsc maths"
+        "how long is bsc maths",
+        "MCA",
+        "tell me about MCA",
+        "what is MCA"
       ],
-      "answer": "**Programs offered**\n\n**Undergraduate (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc in Computer Science\n- BSc in Mathematics\n\n**Postgraduate (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MSc in Computer Science\n\nThe syllabus follows the university curriculum, with electives and certificate courses added each semester.\n\nFor a program's **eligibility** or **fees**, type its name, for example *BBA fees* or *MBA eligibility*.",
+      "answer": "**Programs offered**\n\n**Undergraduate (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc in Computer Science\n- BSc in Mathematics\n\n**Postgraduate (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MCA\n- MSc in Computer Science\n\nThe syllabus follows the university curriculum, with electives and certificate courses added each semester.\n\nFor a program's **eligibility** or **fees**, type its name, for example *BBA fees* or *MBA eligibility*.",
       "level_answer": {
         "UG": "**Undergraduate programs (3 years)**\n- BCom\n- BBA\n- BCA\n- BSc Computer Science\n- BSc Mathematics\n\nFor details, type a program name, for example *BCA*.",
-        "PG": "**Postgraduate programs (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MSc Computer Science\n\nFor details, type a program name, for example *MBA*."
+        "PG": "**Postgraduate programs (2 years)**\n- MBA (Marketing, Finance, HR)\n- MCom\n- MCA\n- MSc Computer Science\n\nFor details, type a program name, for example *MBA*."
       },
-      "program_answer": "**{name}**\n\n{about}\n\n- **Level:** {level}\n- **Duration:** {duration}\n- **Tuition:** ₹{fee} per year\n- **Eligibility:** {eligibility}"
+      "program_answer": "**{name}**\n\n{about}\n\n- **Level:** {level}\n- **Duration:** {duration}\n- **Tuition:** ₹{fee} per year\n- **Eligibility:** {eligibility}\n\n**You can also ask about:** *{name} fees*, *{name} eligibility*, *hostel* or *placements*."
     },
     {
       "name": "exams",

@@ -92,6 +92,21 @@ class Chatbot:
                 found.append(prog)
         return found
 
+    def find_missing(self, text: str, found: list) -> tuple:
+        """Degrees the person named that we do not offer, and names that are ambiguous.
+
+        "MBA and MTech fees" -> missing ["MTech"].   "bsc fees" -> ambiguous ["bsc"].
+        Without this, an unknown name would be skipped silently.
+        """
+        t = normalise(text)
+
+        def has(word):
+            return re.search(rf"(?<!\w){re.escape(normalise(word))}(?!\w)", t)
+
+        missing = [w for w in self.classifier.not_offered if has(w)]
+        ambiguous = [w for w in self.classifier.ambiguous if has(w) and not found]
+        return missing, ambiguous
+
     def strip_programs(self, text: str) -> str:
         """The question with every program name removed: "fees of BBA and MBA" -> "fees of and".
         Program names are strong words, so they can hide the real topic."""
@@ -143,7 +158,8 @@ class Chatbot:
 
         pieces = []
         for piece in split_message(message) or [message]:
-            if len(self.find_programs(piece)) > 1:   # "BBA and MBA fees": keep whole
+            if len(self.find_programs(piece)) > 1 or self.find_missing(piece, [])[0]:
+                # "BBA and MBA fees" / "MBA and MTech fees": keep the sentence whole
                 pieces.append(piece)
             else:
                 pieces.extend(self._split_on_and(piece))
@@ -152,10 +168,14 @@ class Chatbot:
         answers = []          # replies we are confident about
         unanswered = []       # pieces we could not answer
         seen = set()          # so two "placement" questions give one answer
+        missing, ambiguous = [], []     # names we do not offer / names that need a choice
 
         for piece in pieces:
             found = self.find_programs(piece)
             program = found[-1] if found else None   # the last one is remembered
+            m, a = self.find_missing(piece, found)
+            missing += [w for w in m if w not in missing]
+            ambiguous += [w for w in a if w not in ambiguous]
             level = self.find_level(piece)
             if program:
                 context["program"], context["level"] = program["name"], program["level"]
@@ -220,6 +240,21 @@ class Chatbot:
                 seen.add(key)
                 from_memory = bool(context.get("program")) and not program
                 answers.append(self._answer_for(intent, context, from_memory))
+
+        notes = []
+        if missing:
+            ours = ", ".join(self.programs)
+            notes.append(f"*We don't offer **{', '.join(missing)}** at {self.classifier.business_name}. "
+                         f"Our programs are: {ours}.*")
+        for word in ambiguous:
+            options = " or ".join(self.classifier.ambiguous[word])
+            notes.append(f"*By **{word}** do you mean {options}? "
+                         "Please type the full name.*")
+        if notes:
+            if answers:
+                answers.extend(notes)
+            else:                      # nothing else to say: the note IS the answer
+                return {"text": "\n\n".join(notes), "details": details, "unanswered": unanswered}
 
         return {
             "text": self._compose(answers, unanswered),

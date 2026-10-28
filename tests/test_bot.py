@@ -169,6 +169,8 @@ COURSE_FAQ["programs"] = [
      "fee": "50,000", "duration": "3 years"},
     {"name": "MBA", "level": "PG", "aliases": [], "fee": "90,000", "duration": "2 years"},
 ]
+COURSE_FAQ["not_offered"] = ["MTech", "BA"]
+COURSE_FAQ["ambiguous"] = {"BSc": ["BSc Maths", "BSc Physics"]}
 COURSE_FAQ["intents"] = [dict(i) for i in TEST_FAQ["intents"]]
 for _i in COURSE_FAQ["intents"]:
     if _i["name"] == "fees":
@@ -239,3 +241,24 @@ def test_last_program_is_remembered(course_bot):
     context = {}
     course_bot.reply("what is the fee structure for BBA and MBA", context)
     assert context["program"] == "MBA"
+
+
+# ---------------- names the college does not offer ----------------
+def test_unknown_degree_is_reported_not_skipped(course_bot):
+    text = course_bot.reply("what is the fee structure for BBA and MTech", {})["text"]
+    assert "BBA costs Rs 50,000" in text
+    assert "MTech" in text and "don't offer" in text
+
+
+def test_only_unknown_degree_gets_a_clear_answer(course_bot):
+    text = course_bot.reply("BA", {})["text"]
+    assert "don't offer" in text and "BBA, MBA" in text
+
+
+def test_ambiguous_name_asks_which_one(course_bot):
+    text = course_bot.reply("what is the fee structure for BSc", {})["text"]
+    assert "BSc Maths or BSc Physics" in text
+
+
+def test_four_programs_in_a_row(course_bot):
+    assert course_bot.reply("fee structure BBA MBA", {})["text"].count("costs Rs") == 2
